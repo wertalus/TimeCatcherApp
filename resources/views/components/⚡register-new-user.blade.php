@@ -36,7 +36,7 @@ new class extends Component
         $this->reset();
 
         // Optionally, you can emit an event or set a success message
-        session()->flash('message', __('User registered successfully.'));
+        $this->message =__('User registered successfully.');
     }
     };
     ?>
@@ -45,9 +45,9 @@ new class extends Component
 <form id="register-new-user" wire:submit.prevent="register" class="container" autocomplete="off">
     <h5 class="text-start">{{__('Register New User')}}</h5>
     <hr>
-    @if (session('message'))
+    @if ($message)
         <div class="alert alert-success mt-2">
-            {{ session('message') }}
+            {{ $message }}
         </div>
     @endif
     <div class="row g-3 align-items-center">

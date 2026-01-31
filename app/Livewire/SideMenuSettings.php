@@ -13,11 +13,6 @@ class SideMenuSettings extends Component
         $this->dispatch('show-component', componentNumber: $componentNumber);
     }
 
-    public function mount()
-    {
-        app()->setLocale(auth()->user()->settings->language ?? 'pl');
-    }   
-
     public function render()
     {
         return view('livewire.side-menu-settings');

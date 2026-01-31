@@ -18,6 +18,7 @@ class PasswordChange extends Component
     public $confirmPassword;
     
     public $message;
+    public $selectedLanguage;
 
     public function mount()
     {
@@ -25,7 +26,6 @@ class PasswordChange extends Component
         $this->newPassword = '';
         $this->confirmPassword = '';
         $this->message = '';
-        app()->setLocale(auth()->user()->settings->language ?? 'pl');
     }
 
     public function changePassword()

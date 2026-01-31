@@ -5,8 +5,11 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use App\Models\Setting;
 class Settings extends Component
 {
+    public $selectedLanguage;
+
     public $value = 0;
     #[On('show-component')]
     function MenuItem($componentNumber){     
@@ -25,6 +28,9 @@ class Settings extends Component
                 break;
             case '5':
                 return $this->value = 5;
+                break;
+            case '6':
+                return $this->value = 6;
                 break;            
             default:
                 return $this->value = 0;
@@ -34,7 +40,9 @@ class Settings extends Component
 
     public function mount()
     {
-        app()->setLocale(auth()->user()->settings->language ?? 'pl');
+        $setting = Setting::where('user_id', auth()->id())->first();
+        $this->selectedLanguage = $setting ? $setting->language : 'en';
+        app()->setLocale($this->selectedLanguage);
     }
 
     #[Layout('layouts.livewire')]

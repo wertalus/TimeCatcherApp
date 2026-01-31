@@ -1,5 +1,24 @@
 <!doctype html>
-@php app()->setLocale(auth()->user()->settings->language); @endphp
+@php
+//$user = auth()->user();
+$locale = 'pl';
+$theme = 'light';
+
+if(auth()->check()) {
+    $user = auth()->user();
+    if ($user->settings) {
+        $langSetting = $user->settings->language;
+        if ($langSetting) {
+            $locale = $langSetting;
+        }
+        $themeSetting = $user->settings->theme;
+        if ($themeSetting) {
+            $theme = $themeSetting;
+        }
+    }
+}
+app()->setLocale($locale);
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -9,7 +28,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'TimeCatcher') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -21,7 +40,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body data-bs-theme="{{ auth()->check() ? (auth()->user()->settings->theme ?? 'light') : 'light' }}">
+<body data-bs-theme="{{ $theme }}">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

@@ -13,8 +13,8 @@
         </div>
         <div class="col-auto">
             <select id="language-select" class="form-control" wire:model="selectedLanguage">
-                <option value="en">🇺🇸 English</option>
                 <option value="pl">🇵🇱 Polski</option>
+                <option value="en">🇺🇸 English</option>
             </select>
         </div>
     </div>

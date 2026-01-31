@@ -2,9 +2,14 @@
     <div class="flex-shrink-0 border ms-4 rounded-3 col-2" style="width: 280px;" >   
         @livewire('side-menu-settings')
     </div>
-    @if ($value == 5)
+    @if ($value == 2)
         <div class=" ms-4 col border rounded-3 p-4">
-            @livewire('password-change')
+            <livewire:template.create />
+        </div>
+    @endif
+    @if ($value == 3)
+        <div class=" ms-4 col border rounded-3 p-4">
+            <livewire:personal-settings />
         </div>
     @endif
     @if ($value == 4)
@@ -12,9 +17,14 @@
             <livewire:register-new-user />
         </div>
     @endif    
-    @if ($value == 3)
+    @if ($value == 5)
         <div class=" ms-4 col border rounded-3 p-4">
-            <livewire:personal-settings />
+            @livewire('password-change')
+        </div>
+    @endif
+    @if ($value == 6)
+        <div class=" ms-4 col border rounded-3 p-4">
+            <livewire:template-index />
         </div>
     @endif
 </div>

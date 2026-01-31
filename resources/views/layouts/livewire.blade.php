@@ -1,5 +1,25 @@
 <!doctype html>
-@php app()->setLocale(auth()->check() ? (auth()->user()->settings->language ?? 'pl') : 'pl'); @endphp
+@php
+//$user = auth()->user();
+$locale = 'pl';
+$theme = 'light';
+
+if(auth()->check()) {
+    $user = auth()->user();
+    if ($user->settings) {
+        $langSetting = $user->settings->language;
+        if ($langSetting) {
+            $locale = $langSetting;
+        }
+        $themeSetting = $user->settings->theme;
+        if ($themeSetting) {
+            $theme = $themeSetting;
+        }
+    }
+}
+
+app()->setLocale($locale);
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -10,7 +30,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'TimeCatcher') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -23,7 +43,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/css/sidebars.css' ,'resources/js/app.js'])
 </head>
-<body data-bs-theme="{{ auth()->check() && auth()->user()->settings ? auth()->user()->settings->theme : 'light' }}">
+<body data-bs-theme="{{ $theme }}">
     <div id="app">
         @livewire('nav-bar')
         <main class="py-4">

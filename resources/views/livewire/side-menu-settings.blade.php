@@ -59,7 +59,7 @@
         <h2 class="accordion-header">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                {{__('Orders')}}
+                {{__('Templates')}}
             </button>
         </h2>
         <div id="flush-collapseThree" class="accordion-collapse collapse"
@@ -68,19 +68,11 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('New')}}</a>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(2)">{{__('New template')}}</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Processed')}}</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Shipped')}}</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Returned')}}</a>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(6)">{{__('All templates')}}</a>
                     </li>
                 </ul>
             </div>

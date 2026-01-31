@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+@php
+//$user = auth()->user();
+$locale = 'pl';
+$theme = 'light';
+
+if(auth()->check()) {
+    $user = auth()->user();
+    if ($user->settings) {
+        $langSetting = $user->settings->language;
+        if ($langSetting) {
+            $locale = $langSetting;
+        }
+        $themeSetting = $user->settings->theme;
+        if ($themeSetting) {
+            $theme = $themeSetting;
+        }
+    }
+}
+@endphp
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -22,7 +42,7 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col" x-data @toggle-dark-mode.window="document.body.classList.toggle('dark', $event.detail)" data-bs-theme="light">
+    <body data-bs-theme="{{ $theme }}">
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
 
                 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
