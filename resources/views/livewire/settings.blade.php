@@ -2,6 +2,11 @@
     <div class="flex-shrink-0 border ms-4 rounded-3 col-2" style="width: 280px;" >   
         @livewire('side-menu-settings')
     </div>
+    @if ($value == 1)
+        <div class=" ms-4 col border rounded-3 p-4">
+            <livewire:template.edit />
+        </div>
+    @endif
     @if ($value == 2)
         <div class=" ms-4 col border rounded-3 p-4">
             <livewire:template.create />
@@ -24,7 +29,7 @@
     @endif
     @if ($value == 6)
         <div class=" ms-4 col border rounded-3 p-4">
-            <livewire:template-index />
+            <livewire:template-list />
         </div>
     @endif
 </div>
