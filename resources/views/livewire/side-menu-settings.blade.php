@@ -36,8 +36,8 @@
             <div class="accordion-body">                    
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Overview')}}</a>
+                        <a href="{{ route('measurement') }}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Measurement')}}</a>
                     </li>
                     <li>
                         <a href="#"
@@ -67,12 +67,12 @@
             <div class="accordion-body">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(2)">{{__('New template')}}</a>
+                        <a href="{{ route('create-template') }}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('New template')}}</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(6)">{{__('All templates')}}</a>
+                        <a href="{{ route('templates-list')}}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('All templates')}}</a>
                     </li>
                 </ul>
             </div>
@@ -90,16 +90,16 @@
             <div class="accordion-body">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(4)">{{__('New...')}}</a>
+                        <a href="{{route('register/new-user')}}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('New...')}}</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(3)" >{{__('Profile')}}</a>
+                        <a href="{{ route('personal-settings') }}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Profile')}}</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded" wire:click="showComponent(5)">{{__('Change Password')}}
+                        <a href="{{route('change-password')}}"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">{{__('Change Password')}}
                         </a>
                     </li>
                     <li>

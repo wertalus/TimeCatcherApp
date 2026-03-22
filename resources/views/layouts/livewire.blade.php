@@ -1,24 +1,17 @@
 <!doctype html>
 @php
 //$user = auth()->user();
-$locale = 'pl';
 $theme = 'light';
 
 if(auth()->check()) {
     $user = auth()->user();
     if ($user->settings) {
-        $langSetting = $user->settings->language;
-        if ($langSetting) {
-            $locale = $langSetting;
-        }
         $themeSetting = $user->settings->theme;
         if ($themeSetting) {
             $theme = $themeSetting;
         }
     }
 }
-
-app()->setLocale($locale);
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -47,11 +40,25 @@ app()->setLocale($locale);
     <div id="app">
         @livewire('nav-bar')
         <main class="py-4">
-            {{ $slot }}
+            <div class="container-fluid row py-4 border rounded-3">
+                <div class="flex-shrink-0 border ms-4 rounded-3 col-2" style="width: 280px;" >   
+                    @livewire('side-menu-settings')
+                </div>
+                <div class=" ms-4 col border rounded-3 p-4">
+                    {{ $slot }}
+                </div>
+            </div>
+            
         </main>
     </div>
     <script>
         window.userSettings = @json(auth()->check() ? auth()->user()->settings : null);
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.history.length <= 1) {
+                const backBtn = document.getElementById('back-btn');
+                if (backBtn) backBtn.disabled = true;
+            }
+        });
     </script>
     @livewireScripts
 </body>

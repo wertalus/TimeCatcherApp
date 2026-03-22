@@ -1,10 +1,11 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
-new class extends Component
+new  #[Layout('layouts::livewire')] class extends Component
 {
-    //
+    
 };
 ?>
 

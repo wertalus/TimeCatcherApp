@@ -4,9 +4,10 @@ use Livewire\Component;
 use Livewire\Attributes\Validate;
 use App\Models\Template;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Layout;
 
 
-new class extends Component
+new  #[Layout('layouts::livewire')] class extends Component
 {
     public $message = '';
     public $title = '';

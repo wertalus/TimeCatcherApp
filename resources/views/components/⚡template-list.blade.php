@@ -5,9 +5,10 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Template;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 
 
-new class extends Component
+new #[Layout('layouts::livewire')] class extends Component
 {
     use WithPagination;
     public $search = '';
@@ -20,11 +21,6 @@ new class extends Component
         $template->delete();
         session()->flash('message', __('Template deleted.'));
         $this->dispatch('refreshTemplates');
-    }
-
-    function showComponent($componentNumber)    
-    {
-        $this->dispatch('show-component', componentNumber: $componentNumber);
     }
 
     #[Computed]
@@ -52,11 +48,10 @@ new class extends Component
             <tr>
                 <th>#</th>
                 <th>{{ __('Title') }}</th>
-                <th>{{ __('Items') }}</th>
                 <th>{{ __('Created') }}</th>
                 <th>{{ __('ID') }}</th>
-                <th>{{ __('Edit') }}</th>
-                <th>{{ __('Delete') }}</th>
+                <th class="text-center col-1">{{ __('Edit') }}</th>
+                <th class="text-center col-1">{{ __('Delete') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -64,14 +59,13 @@ new class extends Component
                 <tr>
                     <td>{{ $loop->iteration + ($this->templates->currentPage()-1)*$this->templates->perPage() }}</td>
                     <td>{{ $template->title }}</td>
-                    <td>{{ $template->items_count }}</td>
                     <td>{{ $template->created_at->diffForHumans() }}</td>
                     <td>{{$template->id}}</td>
-                    <td class="text-end">
-                        <a href="{{ route('edit-template', $template->id) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</button>
+                    <td class="text-center col-1">
+                        <a href="{{ route('edit-template', $template->id) }}" class="btn btn-sm btn-primary w-100">{{ __('Edit') }}</a>
                     </td>
-                    <td>
-                        <button wire:click="deleteTemplate({{ $template->id }})" wire:confirm="{{ __('Are you sure?') }}"class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
+                    <td class="text-center col-1">
+                        <button wire:click="deleteTemplate({{ $template->id }})" wire:confirm="{{ __('Are you sure?') }}"class="btn btn-sm btn-danger w-100">{{ __('Delete') }}</button>
                     </td>
                 </tr>
             @endforeach

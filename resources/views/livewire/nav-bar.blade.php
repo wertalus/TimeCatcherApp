@@ -1,7 +1,22 @@
 <div>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/welcome') }}">
+        <div class="container-fluid align-items-evenly">
+            <!-- Left Side Navigation -->
+            <ul class="navbar-nav me-auto">
+                @auth
+                <li class="nav-item">
+                    <button id="back-btn" class="btn btn-link nav-link" type="button" onclick="history.back()" title="Previous Page">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="forward-btn" class="btn btn-link nav-link" type="button" onclick="history.forward()" title="Next Page">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </li>
+                @endauth
+            </ul>
+            <a class="navbar-brand mx-4" href="{{ url('/welcome') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -9,11 +24,6 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
-
-                </ul>
-
                 <!-- Center: Current Time -->
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">

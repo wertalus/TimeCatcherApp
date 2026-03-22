@@ -1,5 +1,5 @@
 import './bootstrap';
-//import Alpine from 'alpinejs';
+import Alpine from 'alpinejs';
 import './dark-mode';
 import './clock';
 import './dark-mode-setting';

@@ -1,23 +1,17 @@
 <!doctype html>
 @php
 //$user = auth()->user();
-$locale = 'pl';
 $theme = 'light';
 
 if(auth()->check()) {
     $user = auth()->user();
     if ($user->settings) {
-        $langSetting = $user->settings->language;
-        if ($langSetting) {
-            $locale = $langSetting;
-        }
         $themeSetting = $user->settings->theme;
         if ($themeSetting) {
             $theme = $themeSetting;
         }
     }
 }
-app()->setLocale($locale);
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

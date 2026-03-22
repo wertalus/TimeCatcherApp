@@ -3,16 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
 class SideMenuSettings extends Component
 {
-    public $componentNumber = 0;
-
-    function showComponent($componentNumber)    
-    {
-        $this->dispatch('show-component', componentNumber: $componentNumber);
-    }
-
+    #[Layout('layouts.livewire')]
     public function render()
     {
         return view('livewire.side-menu-settings');
