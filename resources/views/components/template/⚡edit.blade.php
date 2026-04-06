@@ -3,6 +3,7 @@
 use Livewire\Component;
 use App\Models\TemplateItem;
 use Livewire\Attributes\Layout;
+use App\Models\Template;
 
 new #[Layout('layouts::livewire')] class extends Component
 {
@@ -128,17 +129,27 @@ new #[Layout('layouts::livewire')] class extends Component
             $this->addChild();
         }
     }
+    public function deleteTemplate($id)
+    {
+        Template::where('id', $this->templateId)
+            ->where('user_id', auth()->id())
+            ->delete();
+        
+        session()->flash('message', __('Template deleted successfully.'));
+        return redirect()->route('templates-list');
+    }
 };
 ?>
 
-<form id="edit-template" wire:submit.prevent="saveTemplate" class="container" autocomplete="off">
+<div class="container mx-0">
+<form id="edit-template" wire:submit.prevent="saveTemplate" autocomplete="off">
     <h5 class="text-start">{{ __('Edit template') }}</h5>
     <hr>
     @if($items)
-    <div class="row g-3 align-items-start mt-3">
-        <div class="col">
+        <div class="row g-3 align-items-start mt-3">
+            <div class="col">
                 <ul class="row g-2 align-items-center mb-2" wire:sort="handleSort">
-                @foreach($items as $id => $item)
+                    @foreach($items as $id => $item)
                         <li class="col-12 d-flex align-items-center" wire:key="{{ $item['id'] }}" wire:sort:item="{{ $item['id'] }}">
                             <div class="col-auto">
                                 <span class="badge bg-secondary" wire:sortable.handle style="cursor: grab;">{{ $loop->iteration }}</span>
@@ -150,19 +161,22 @@ new #[Layout('layouts::livewire')] class extends Component
                                 <button type="button" class="btn btn-sm btn-danger" wire:click="removeChild('{{ $id }}')">&times;</button>
                             </div>
                         </li>
-                @endforeach
+                    @endforeach
                 </ul>
-            </div>
             </div>
             <div class="d-flex justify-content-center mb-3">
                 <button type="button" class="btn btn-outline-primary justyfy-content-center align-items-center border rounded-circle" style="width:40px;height:40px" wire:click="addChild" title="{{ __('Add Point') }}" aria-label="{{ __('Add Point') }}">
                     <i class="bi bi-plus-lg" aria-hidden="true"></i>
                 </button>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">{{ __('Save Template') }}</button>
+            <div class="align-items-center d-flex justify-content-center gap-2 mb-3">
+                <button type="submit" class="btn btn-sm btn-success w-100">{{ __('Save Template') }}</button>
+            </div>
         </div>
-    @else
+        @else
         <div class="alert alert-danger">{{ __('Template not found.') }}</div>
-    @endif
-    
-</form>
+        @endif
+        
+    </form>
+    <button class="btn btn-sm btn-danger w-100" wire:click="deleteTemplate({{ $templateId }})" wire:confirm="{{ __('Are you sure?') }}">{{ __('Delete template') }}</button>
+</div>
